@@ -1,17 +1,13 @@
 import { Module } from '@nestjs/common';
-import { UsersController } from './users.controller';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './users.model';
-import { UserService } from './users.service';
 import { JwtModule } from '@nestjs/jwt';
+import { AuthGuard } from './auth.guard';
+import { ValidateRequest } from 'src/utility/ValidateToken';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
 
 @Module({
   imports: [
-    SequelizeModule.forFeature([User]),
     JwtModule.registerAsync({
-      imports: [ConfigModule], // Required for injecting ConfigService
+      imports: [ConfigModule],
       inject: [ConfigService],
       global: true,
       useFactory: async (configService: ConfigService) => ({
@@ -20,7 +16,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       }),
     }),
   ],
-  controllers: [UsersController],
-  providers: [UserService],
+  providers: [AuthGuard, ValidateRequest],
+  exports: [AuthGuard, ValidateRequest],
 })
-export class UsersModule { }
+export class AuthModule { }

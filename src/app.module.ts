@@ -6,6 +6,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/users.model';
 import { ConfigModule } from '@nestjs/config';
 import { ChatGateway } from './chats/chats.gateway';
+import { ProfileModule } from './profile/profile.module';
 
 
 @Module({
@@ -22,8 +23,8 @@ import { ChatGateway } from './chats/chats.gateway';
       database: 'Messaging-App',
       models: [User],
       autoLoadModels: true,
-      synchronize: true, // don't use in production
-    }), UsersModule
+      synchronize: true,
+    }), UsersModule, ProfileModule
   ],
   controllers: [AppController],
   providers: [AppService, ChatGateway],
