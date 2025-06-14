@@ -22,4 +22,4 @@ export class profileController {
             user_profile: profile
         }
     }
-}
+}                           

@@ -1,4 +1,3 @@
-// chat.gateway.ts
 import {
   SubscribeMessage,
   WebSocketGateway,
@@ -23,6 +22,6 @@ export class ChatGateway {
     @ConnectedSocket() client: Socket,
   ): void {
     console.log(`Received message: ${data.message} from ${data.sender}`);
-    this.server.emit('message', data); // Broadcast to all clients
+    this.server.emit('message', data);
   }
 }
